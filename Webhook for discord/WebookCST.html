@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Webhook for Discord</title>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+
+	<style>
+
+body {
+    margin: auto;
+    width: 50%;
+    border: 3px solid black;
+    padding: 10px;
+}
+
+.importantText {
+	color: red;
+	font-size: 1.24em;
+}
+
+table, th, td{
+	border: 1px solid black;
+}
+
+td {
+	width: 240px;
+	text-align: center;
+}
+
+#content {
+	height: 100px;
+}
+
+#red {
+	background-color: red;
+	color: white;
+}
+
+#blue {
+	background-color: blue;
+	color: white;
+}
+
+label {
+	display: block;
+	clear: left;
+	float: left;
+	width: 150px;
+}
+
+input {
+	display: block;
+	float: left;
+	width: 250px
+}
+
+	</style>
+</head>
+<body>
+
+	<h1>Webhook for Discord</h1>
+
+
+	<fieldset>
+		<legend>Webhook settings</legend>
+		<p class="importantText">Input boxes with a " * " have to be entered!</p>
+
+		<label for="embed_title">Title *</label>
+		<input type="Text" name="embed_title"  id="embed_title" caption="embed_title" value="">
+		<br />
+		<label for="botName">Enter bot Name: *</label>
+		<input type="Text" name="botName"  id="botName" caption="Enter user botName here" value="Announcements">
+		<br />
+		<label for="avatar">Enter bot avatar url: *</label>
+		<input type="Text" name="botavatar"  id="botavatar" caption="Enter bot avatar here" value="http://icons.iconarchive.com/icons/graphicloads/100-flat/128/announcement-icon.png">
+		<br />
+		<label for="author_icon">Icon of Author *</label>
+		<input type="Text" name="author_icon"  id="author_icon" caption="author_icon" value="http://i.imgur.com/Newy0u9.png">
+		<br />
+		<label for="author_name">Author Name *</label>
+		<input type="Text" name="author_name"  id="author_name" caption="author_name" value="CommanderDerpy">
+		<br />
+		<label for="url">Enter webhook url: *</label>
+		<input type="Text" name="url"  id="url" caption="Enter user url here" value="https://discordapp.com/api/webhooks/238832270050328577/nexOv2w2YnTDcanIQOdg0Epwjz6mhsOerz7RnhQLty48nTCljpcY_TVKmovEJ6mFWx93">
+		<br />
+		<label for="content">Content *</label>
+		<input type="Text" name="content"  id="content" caption="content" size="">
+		<br />
+		<label for="link">Enter Link</label>
+		<input type="Text" name="link"  id="link" caption="Enter link here">
+		<br />
+		<label for="color">color</label>
+		<input type="Text" name="color"  id="color" caption="color" value="#ff0000">
+		<br />
+		<label for="">placeholder</label>
+		<input type="Text" name=""  id="" caption="" value="">
+		<br />
+
+
+		<input type="Submit" name="Submit" value="Submit" onclick="send()">
+	</fieldset>
+
+	<br />
+	<table>
+		<caption>Options</caption>
+		<thead>
+			<th>Colors</th><th>Markdown</th>
+		</thead>
+		<tbody>
+			<tr>
+				<td id="red">#ff0000</td><td>italics = *italics*
+bold  = **bold**
+bold italics = ***bold italics***
+strikeout = ~~strikeout~~
+underline = __underline__
+underline italics = __*underline italics*__
+underline bold = __**underline bold**__
+underline bold italics = __***underline bold italics***__</td>
+			</tr>
+			<tr>
+				<td id="blue">#0000ff</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+
+	<script>
+	var currentdate = new Date();
+	function send(){
+		if(!document.getElementById('url').value){
+			Materialize.toast("You need to provide a webhook URL.", 5000)
+		}
+		else{
+		var hookurl = document.getElementById('url').value + "/slack"
+		var msgJson
+		if(document.getElementById('author_icon').value || document.getElementById('author_name').value || document.getElementById('embed_title').value || document.getElementById('embed_content').value){
+			msgJson = {
+			 "username": document.getElementById('botName').value,
+			 "icon_url": document.getElementById('botavatar').value,
+			 "text": document.getElementById('link').value,
+			 "attachments":[{
+			   "footer_icon": document.getElementById('author_icon').value,
+			   "footer": document.getElementById('author_name').value + " | " +currentdate.getDate() +"/" +(currentdate.getMonth()+1) +"/" +currentdate.getFullYear() +" at " +currentdate.getHours() +":" +currentdate.getMinutes() +":" +currentdate.getSeconds(),
+			   "color": document.getElementById('color').value,
+			   "fields": [{
+			    "title": document.getElementById('embed_title').value,
+			    "value": document.getElementById('content').value,
+			   }]
+			  }]
+			}
+		}
+		else{
+			msgJson = {
+			  "username": document.getElementById('botName').value,
+			  "icon_url": document.getElementById('botavatar').value,
+			  "text": document.getElementById('link').value
+			}
+		}
+	  post(hookurl, msgJson);
+	}
+	}
+	</script>
+
+	<script>
+	function post(url, jsonmsg){
+		xhr = new XMLHttpRequest();
+		xhr.open("POST", url, true);
+		xhr.setRequestHeader("Content-type", "application/json");
+		var data = JSON.stringify(jsonmsg);
+		xhr.send(data);
+		xhr.onreadystatechange = function() {
+			if(this.status != 200){
+				Materialize.toast('Error, Discord returned\n'+ this.status + " " + this.responseText, 5000);
+			}
+		}
+	}
+	</script>
+
+</body>
+</html>
