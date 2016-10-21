@@ -120,26 +120,6 @@ function send(){
 }
 </script>
 
-<!--
-<script>
-function post(url, jsonmsg){
-var data = JSON.stringify(jsonmsg);
-$.ajax({
-    type: 'POST',
-    url: url,
-    crossDomain: true,
-    data: data,
-    success: function(responseData, textStatus, jqXHR) {
-        alert(responseData);
-    },
-    error: function (responseData, textStatus, errorThrown) {
-        alert('POST failed.\n\nError:' + errorThrown);
-    }
-});
-}
-</script>
--->
-
 <script>
 function post(url, jsonmsg){
 	xhr = new XMLHttpRequest();
