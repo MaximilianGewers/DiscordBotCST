@@ -1,0 +1,114 @@
+Top Down Design
+
+
+
+C# Discord Bot Tutorial video playlist:
+
+https://www.youtube.com/watch?v=oE6alzUzcw4&list=PLvPDrwa-DApf1uISB61qh8vWg46kqYI_y&index=2
+
+
+
+Things to do:
+    
+	- Come up with a bot name
+    
+	- Who ever wants to host the bot has to create the bot profile through Discord
+        
+		- https://discordapp.com/api/oauth2/authorize?client_id="bot_ID_here"&scope=bot&permissions=0
+        
+		- replace "bot_ID_here" with bot ID number (provided when bot profile is created)
+    
+
+
+
+Discord Bot
+
+Problem: 
+    
+	- Display steam sale prices
+    
+	- User input games to master list 
+        
+		(link directly to game page or steam game title)
+    
+	- User request for a current game price
+    
+	- Age restriction on steam
+
+
+
+Inputs: 
+    
+	- game to add to master list
+    
+	- game price requests
+
+
+
+Outputs: 
+    
+	- All games + Expansion prices 
+    
+	- Current price upon request
+    
+
+
+Assumptions: 
+    
+	- Users are idiots
+
+
+
+Hand calculations:
+
+    
+
+** - indicates message displayed by bot
+    
+    
+
+	- !add <gameName> // adds game to MasterList.txt
+        
+		!add Garry's Mod
+        
+		**Garry's Mod has been added to the games list**
+        
+    
+
+	- !price <gameName> // checks MasterList for game, returns current game price
+        
+		!price Garry's Mod
+        
+		**The current price for Garry's Mod is $10.99 CDN**
+    
+    
+
+	- !help // prints a list of commands available to that user
+        
+		!help
+        
+		**Available commands**
+        
+		!add <gameName> // adds a game specified to the list
+        
+		!price <gameName> // returns current price of game specified
+    
+    
+
+	// example output
+    
+		**Garry's Mod has dropped in price to $4.99 CDN**
+
+
+General Algorithm: 
+    
+	Checks MasterList.txt - 6 hour intervals
+    
+	Change price to current price if any difference
+    
+	Display price change in Discord
+
+
+
+Detailed Algorithm: 
+    
