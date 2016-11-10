@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="sx.blah.discord.handle.impl.events.MessageSendEvent"/>
+<fullyQualifiedTypeName name="org.omg.CORBA.PRIVATE_MEMBER"/>
+<fullyQualifiedTypeName name="sx.blah.discord.api.ClientBuilder"/>
+<fullyQualifiedTypeName name="sx.blah.discord.handle.obj.IChannel"/>
+<fullyQualifiedTypeName name="TestBot"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+</qualifiedTypeNameHistroy>

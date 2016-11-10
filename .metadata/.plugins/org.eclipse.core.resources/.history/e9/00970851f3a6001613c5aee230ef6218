@@ -1,0 +1,26 @@
+import sx.blah.discord.api.ClientBuilder;
+import sx.blah.discord.api.events.EventSubscriber;
+import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
+import sx.blah.discord.handle.impl.events.MessageSendEvent;
+import sx.blah.discord.handle.impl.events.ReadyEvent;
+import sx.blah.discord.handle.obj.IChannel;
+
+public class EventHandler
+{
+    @EventSubscriber
+    public void onReadyEvent( ReadyEvent event )
+    {
+        System.out.println("The bot is now ready");
+//        doSomething();
+    }
+
+    @EventSubscriber
+    public void onMessageEvent( MessageReceivedEvent event )
+    {
+        System.out.println(event.getMessage().getAuthor().getName() + ": "
+                + event.getMessage().getContent());
+       private IChannel channel = TestBot.discordClient.getChannelByID("238503415326441473");
+       channel.sendMessage("Polo");
+       
+    }
+}
