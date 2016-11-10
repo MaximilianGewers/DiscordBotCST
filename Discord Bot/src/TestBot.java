@@ -14,7 +14,7 @@ public class TestBot
         {
             System.out.print("You need to specify a token before continuing");
         }
-        discordClient = getClient("MjQ2MDM3NDkxOTQ4MTkxNzYw.CwU0Sg.zcllCVveX3P5HaHIx5cKJAK5YuQ");
+        discordClient = getClient("XXXXXXXXXXX");
 
         discordClient.getDispatcher().registerListener(new EventHandler());
         discordClient.getDispatcher()
