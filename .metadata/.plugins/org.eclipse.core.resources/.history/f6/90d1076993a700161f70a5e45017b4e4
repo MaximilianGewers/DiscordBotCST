@@ -1,0 +1,31 @@
+import java.util.List;
+
+import sx.blah.discord.handle.obj.IMessage;
+import sx.blah.discord.util.DiscordException;
+import sx.blah.discord.util.MessageBuilder;
+import sx.blah.discord.util.MissingPermissionsException;
+import sx.blah.discord.util.RateLimitException;
+
+public class StartUp
+{
+    private static boolean send = false;
+    
+    public static void onStartUp() throws RateLimitException, DiscordException, MissingPermissionsException
+    {
+        System.out.println("Running onStartUp -- Start");
+        
+        
+        if ( send )
+        {
+            new MessageBuilder(TestBot.discordClient).withChannel("238503415326441473").withContent("```Bot is up and running "
+                    + "\nVersion: " +TestBot.version +"```").build();
+        }
+        
+        for ( long i = 0; i < 100000; i++ )
+        {
+            System.out.println(i);            
+        }
+        EventHandler.messageList.bulkDelete(EventHandler.messageList<TestBot.message> TestBot.message);
+        System.out.println("Running onStartUp -- Done");
+    }
+}

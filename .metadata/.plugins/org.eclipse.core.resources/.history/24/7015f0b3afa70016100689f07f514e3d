@@ -1,0 +1,16 @@
+import sx.blah.discord.util.MessageList;
+import sx.blah.discord.api.events.EventSubscriber;
+import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
+import sx.blah.discord.handle.impl.events.ReadyEvent;
+import sx.blah.discord.util.DiscordException;
+import sx.blah.discord.util.MessageList;
+import sx.blah.discord.util.MissingPermissionsException;
+import sx.blah.discord.util.RateLimitException;
+
+public class DeleteXMessages
+{
+    MessageList msgList = new MessageList(TestBot.discordClient,
+            TestBot.message.getChannel(), 100);
+    
+    
+}

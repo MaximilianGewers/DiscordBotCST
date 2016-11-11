@@ -1,0 +1,25 @@
+import sx.blah.discord.api.internal.json.requests.BulkDeleteRequest;
+import sx.blah.discord.util.DiscordException;
+import sx.blah.discord.util.MessageBuilder;
+import sx.blah.discord.util.MessageList;
+import sx.blah.discord.util.MissingPermissionsException;
+import sx.blah.discord.util.RateLimitException;
+
+public class StartUp
+{
+    public static void onStartUp() throws RateLimitException, DiscordException, MissingPermissionsException
+    {
+        System.out.println("Running onStartUp -- Start");
+        
+        MessageList messageList = new MessageList(TestBot.discordClient, TestBot.message.getChannel());
+        
+        new MessageBuilder(TestBot.discordClient).withChannel("238503415326441473").withContent("```Bot is up and running "
+                + "\nVersion: " +TestBot.version +"```").build();
+        for ( long i = 0; i < 100000000; i++ )
+        {
+            System.out.println(i);            
+        }
+        BulkDeleteRequest deleteRequest = new BulkDeleteRequest(messageList);
+        System.out.println("Running onStartUp -- Done");
+    }
+}

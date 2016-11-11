@@ -1,0 +1,8 @@
+
+public class StartUp
+{
+    public static void onStartUp()
+    {
+        System.out.println("Running onStartUp");
+    }
+}

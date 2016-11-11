@@ -1,0 +1,17 @@
+import sx.blah.discord.util.DiscordException;
+import sx.blah.discord.util.MissingPermissionsException;
+import sx.blah.discord.util.RateLimitException;
+
+public class DeleteXMessages
+{
+    public static void deleteFive() throws RateLimitException, DiscordException, MissingPermissionsException
+    {
+        TestBot.channel = TestBot.discordClient.getChannelByID("238503415326441473");
+        TestBot.channel.getMessages().delete(0);
+        for ( int i = 0; i <= 5; i++ )
+        {
+            TestBot.channel.getMessages().delete(0);
+        }
+    }
+    
+}

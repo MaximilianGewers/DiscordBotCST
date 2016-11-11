@@ -1,0 +1,8 @@
+import sx.blah.discord.util.MessageList;
+
+public class DeleteXMessages
+{
+    MessageList messageList = new MessageList(TestBot.discordClient,
+            TestBot.message.getChannel());
+    
+}

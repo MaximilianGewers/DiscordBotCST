@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="sx.blah.discord.handle.impl.events.MessageSendEvent"/>
 <fullyQualifiedTypeName name="org.omg.CORBA.PRIVATE_MEMBER"/>
 <fullyQualifiedTypeName name="sx.blah.discord.api.ClientBuilder"/>
 <fullyQualifiedTypeName name="sx.blah.discord.handle.obj.IChannel"/>
-<fullyQualifiedTypeName name="TestBot"/>
+<fullyQualifiedTypeName name="sx.blah.discord.util.MessageBuilder"/>
+<fullyQualifiedTypeName name="StartUp"/>
+<fullyQualifiedTypeName name="sx.blah.discord.handle.impl.events.MessageDeleteEvent"/>
+<fullyQualifiedTypeName name="java.io.ObjectInputStream.GetField"/>
+<fullyQualifiedTypeName name="junit.framework.Test"/>
+<fullyQualifiedTypeName name="sx.blah.discord.api.internal.json.requests.BulkDeleteRequest"/>
+<fullyQualifiedTypeName name="sx.blah.discord.handle.impl.events.MessageSendEvent"/>
+<fullyQualifiedTypeName name="EventHandler"/>
+<fullyQualifiedTypeName name="sx.blah.discord.util.MessageList"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="TestBot"/>
+<fullyQualifiedTypeName name="DeleteXMessages"/>
 </qualifiedTypeNameHistroy>
