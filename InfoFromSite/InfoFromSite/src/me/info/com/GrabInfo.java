@@ -15,6 +15,8 @@ public class GrabInfo {
 
     public static void WriteToFile ( String title, String line ) throws Exception {
         String path = "E:/Game_List.txt"; // path to find file at
+        char TPseparator = '{'; // Separator used for searching functions regarding to Title or Price
+        char IDseparator = '}'; // Separator used for searching functions regarding to game ID or price
         ReadFile file = new ReadFile( path ); // Opens the file and reads it
         WriteFile data = new WriteFile( path, true ); // creates a WriteToFile variable
 
@@ -22,10 +24,10 @@ public class GrabInfo {
             file.createFile();
         }
         try {
-            String[] arrayLines = file.OpenFile(); // Adds the lines to an array
+            String[] arrayLines = file.openFile(); // Adds the lines to an array
             if ( arrayLines.length > 0 ) {
-                if ( file.lineExists( title ) ) {
-                    arrayLines[file.getLineNumber( title ) - 1] = line;
+                if ( file.lineExists( title, TPseparator ) ) {
+                    arrayLines[file.getLineNumber( title, TPseparator ) - 1] = line;
                     data.wipeFile(); // Clears all contents in the file (needed for changing particular lines)
                     data.writeArrayToFile( arrayLines ); // Writes array to the file
                 } else {
@@ -35,7 +37,6 @@ public class GrabInfo {
                 data.writeToFile( line );
             }
 
-            System.out.println( "Wrote to file successfully." );
         } catch ( IOException e ) {
             System.out.println( e.getMessage() + "\nCould not write to file." );
         }
