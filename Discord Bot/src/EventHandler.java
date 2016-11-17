@@ -1,3 +1,4 @@
+
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
 import sx.blah.discord.handle.impl.events.ReadyEvent;
@@ -11,7 +12,8 @@ public class EventHandler
 {
 
     @EventSubscriber
-    public void onReadyEvent( ReadyEvent event ) throws RateLimitException, DiscordException, MissingPermissionsException
+    public void onReadyEvent( ReadyEvent event ) throws RateLimitException,
+            DiscordException, MissingPermissionsException
     {
         System.out.println("The bot is now ready");
         // Runs the on start up class and the on start up method to do something
@@ -21,9 +23,12 @@ public class EventHandler
     }
 
     @EventSubscriber
-    public void onMessageEvent( MessageReceivedEvent event ) throws MissingPermissionsException, RateLimitException, DiscordException
+    public void onMessageEvent( MessageReceivedEvent event )
+            throws MissingPermissionsException, RateLimitException,
+            DiscordException
     {
-        System.out.println(event.getMessage().getAuthor().getName() + ": " + event.getMessage().getContent());
+        System.out.println(event.getMessage().getAuthor().getName() + ": "
+                + event.getMessage().getContent());
 
         // start of Example
         /*
@@ -64,37 +69,58 @@ public class EventHandler
         // TestBot.channel.getID());
         // }
         // else
-        if ( event.getMessage().getContent().equalsIgnoreCase("p") )
+        if ( event.getMessage().getContent().contains("!prune") )
         {
-            new MessageBuilder(TestBot.discordClient).withChannel("238503415326441473").withContent("Delete me").build();
-            TestBot.message = event.getMessage();
             try
             {
-
-                MessageList msgList = new MessageList(TestBot.discordClient, TestBot.message.getChannel());
-
-                System.out.println("SUCESS");
-                if ( msgList.load(1) )
-                {
-                    System.out.println("Load success");
-                }
-                else
-                {
-                    System.out.println("Load fail");
-                }
-                new MessageBuilder(TestBot.discordClient).withChannel("238503415326441473").withContent("IF DELETE WORKED YOU SHOULD NOT SEE THIS -- BOO").build();
-                msgList.delete(0);
-                new MessageBuilder(TestBot.discordClient).withChannel("238503415326441473").withContent("I tried to delete the message -- Did it work?").build();
+                TestBot.message = event.getMessage();
+                MessageList msgList = new MessageList(TestBot.discordClient,
+                        TestBot.message.getChannel());
+                
+                 String command = event.getMessage().getContent();
+                 command = command.trim();
+                 System.out.println("String is " +command.length() +" long");
+                 command = command.substring(7, command.length() );
+                 System.out.println("The number is :" +command+ ":");
+                 int deleteIndex = Integer.parseInt(command);
+                
+                msgList.load(deleteIndex);
+                msgList.bulkDelete(msgList);
             }
             catch ( NullPointerException e )
             {
-                new MessageBuilder(TestBot.discordClient).withChannel("238503415326441473").withContent("Could not Delete the message above -- This is the Error: " + e.getMessage()).build();
+                System.out.println("There was a problem\n" +e.getMessage());
             }
         }
-        else if ( event.getMessage().getContent().equalsIgnoreCase("p2") )
-        {
-            DeleteXMessages.delete();         
+        else if(event.getMessage().getContent().contains("!check")){
+            try{
+                TestBot.message = event.getMessage();
+                MessageList msgList = new MessageList(TestBot.discordClient,
+                        TestBot.message.getChannel());
+                
+                 String command = event.getMessage().getContent();
+                 command = command.trim();
+                 System.out.println("String is " +command.length() +" long");
+                 command = command.substring(7, command.length() );
+                 String url = "https://steamdb.info/app/";
+                 try
+                {
+                     System.out.println(command);
+                    new MessageBuilder(TestBot.discordClient)
+                    .withChannel("238503415326441473")
+                    .withContent(GrabInfo.GetList(url+command, command))
+                    .build();
+                }
+                catch ( Exception e )
+                {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }catch (NullPointerException e){
+                System.out.println("There was a problem\n" + e.getMessage());
+            }
         }
+
         // else if (event.getMessage().getContent().equalsIgnoreCase("give
         // current channel id")) {
         // String channelID = TestBot.channel.getID();

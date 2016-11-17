@@ -21,15 +21,15 @@ public class TestBot
         // {
         // System.out.print("You need to specify a token before continuing");
         // }
-        discordClient = getClient(
-                "...");
+        discordClient = setClient(
+                "");
 
         discordClient.getDispatcher().registerListener(new EventHandler());
         discordClient.getDispatcher()
                 .registerListener(new ReadyEventListener());
     }
 
-    public static IDiscordClient getClient( String token )
+    public static IDiscordClient setClient( String token )
             throws DiscordException
     {
         return new ClientBuilder().withToken(token).login();

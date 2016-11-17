@@ -5,7 +5,7 @@ import sx.blah.discord.util.RateLimitException;
 
 public class StartUp
 {
-    private static boolean send = true;
+    private static boolean send = false;
 
     public static void onStartUp() throws RateLimitException, DiscordException,
             MissingPermissionsException

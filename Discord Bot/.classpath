@@ -27,5 +27,7 @@
 	<classpathentry kind="lib" path="libs/websocket-api-9.3.11.v20160721.jar"/>
 	<classpathentry kind="lib" path="libs/websocket-client-9.3.11.v20160721.jar"/>
 	<classpathentry kind="lib" path="libs/websocket-common-9.3.11.v20160721.jar"/>
+	<classpathentry kind="lib" path="E:/GitHub/DiscordBotCST/Discord Bot/libs/FileManagement.jar"/>
+	<classpathentry kind="lib" path="E:/GitHub/DiscordBotCST/Discord Bot/libs/jsoup-1.10.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
