@@ -1,4 +1,6 @@
 
+import java.rmi.activation.ActivationGroupDesc.CommandEnvironment;
+
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
 import sx.blah.discord.handle.impl.events.ReadyEvent;
@@ -30,28 +32,106 @@ public class EventHandler
         System.out.println(event.getMessage().getAuthor().getName() + ": "
                 + event.getMessage().getContent());
 
+        TestBot.message = event.getMessage();
+
+        String command = "";
+        String subCommand = "";
+
+        if ( event.getMessage().getContent().charAt(0) == '!' )
+        {
+            String input = event.getMessage().getContent();
+            int space = input.indexOf(' ');
+            command = input.substring(0, space).trim();
+            subCommand = input.substring(space).trim();
+        }
+
+        switch ( command )
+        {
+            case "!prune":
+                System.out.println("made it to case");
+                MessageList msgList = new MessageList(TestBot.discordClient,
+                        TestBot.message.getChannel());
+
+                try
+                {
+                    System.out
+                            .println("String is " + subCommand.length() + " long");
+                    System.out.println("The subCommand is :" + subCommand + ":");
+                    int deleteIndex = Integer.parseInt(subCommand);
+
+                    msgList.load(deleteIndex);
+                    msgList.bulkDelete(msgList);
+                }
+                catch ( NullPointerException e )
+                {
+                    System.out
+                            .println("There was a problem\n" + e.getMessage());
+                }
+                break;
+
+            case "!check":
+                try
+                {
+                    String url = "https://steamdb.info/app/";
+                    try
+                    {
+                        System.out.println(subCommand);
+                        new MessageBuilder(TestBot.discordClient)
+                                .withChannel("238503415326441473")
+                                .withContent(
+                                        GrabInfo.GetList(url + subCommand, subCommand))
+                                .build();
+                    }
+                    catch ( Exception e )
+                    {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+                catch ( NullPointerException e )
+                {
+                    System.out
+                            .println("There was a problem\n" + e.getMessage());
+                }
+                break;
+        }
+
+        // else if(event.getMessage().getContent().contains("!check")){
+        // try{
+        // TestBot.message = event.getMessage();
+        // MessageList msgList = new MessageList(TestBot.discordClient,
+        // TestBot.message.getChannel());
+        //
+        // String command = event.getMessage().getContent();
+        // command = command.trim();
+        // System.out.println("String is " +command.length() +" long");
+        // command = command.substring(7, command.length() );
+        // String url = "https://steamdb.info/app/";
+        // try
+        // {
+        // System.out.println(command);
+        // new MessageBuilder(TestBot.discordClient)
+        // .withChannel("238503415326441473")
+        // .withContent(GrabInfo.GetList(url+command, command))
+        // .build();
+        // }
+        // catch ( Exception e )
+        // {
+        // // TODO Auto-generated catch block
+        // e.printStackTrace();
+        // }
+        // }catch (NullPointerException e){
+        // System.out.println("There was a problem\n" + e.getMessage());
+        // }
+        // }
+
         // start of Example
         /*
          * OnMessageEvent listens for a message and will than execute this code
          * The if statements will filter message content until it finds a true;
          */
-        // if ( event.getMessage().getContent().equalsIgnoreCase("ping") )
-        // {
-        // // This sets the channel object to a static channel. The id here
-        // // below
-        // TestBot.channel =
-        // TestBot.discordClient.getChannelByID("238503415326441473");
-        // // This is the message the bot will send in that channel
-        // TestBot.channel.sendMessage("Pong");
-        // // End of Example
-        // }
-        // else if ( event.getMessage().getContent().equalsIgnoreCase("!help") )
-        // {
-        // TestBot.channel =
-        // TestBot.discordClient.getChannelByID("238503415326441473");
-        // TestBot.channel.sendMessage("Sorry I can't do that yet");
-        // }
-        // else if ( event.getMessage().getContent().equalsIgnoreCase("who do
+
+        // if ( event.getMessage().getContent().equalsIgnoreCase("who do
         // you love the most. Me, Kale or Conner?") )
         // {
         // TestBot.channel =
@@ -59,67 +139,6 @@ public class EventHandler
         // TestBot.channel.sendMessage("@CommanderDerpy#7862 of course. He is
         // senpai. <3");
         // }
-        // else if ( event.getMessage().getContent().equalsIgnoreCase("!LC") )
-        // {
-        // TestBot.channel =
-        // TestBot.discordClient.getChannelByID("238503415326441473");
-        // TestBot.channel.sendMessage("Testing channel list: " +
-        // TestBot.discordClient.getChannels());
-        // TestBot.channel.sendMessage("Testing channel list: " +
-        // TestBot.channel.getID());
-        // }
-        // else
-        if ( event.getMessage().getContent().contains("!prune") )
-        {
-            try
-            {
-                TestBot.message = event.getMessage();
-                MessageList msgList = new MessageList(TestBot.discordClient,
-                        TestBot.message.getChannel());
-                
-                 String command = event.getMessage().getContent();
-                 command = command.trim();
-                 System.out.println("String is " +command.length() +" long");
-                 command = command.substring(7, command.length() );
-                 System.out.println("The number is :" +command+ ":");
-                 int deleteIndex = Integer.parseInt(command);
-                
-                msgList.load(deleteIndex);
-                msgList.bulkDelete(msgList);
-            }
-            catch ( NullPointerException e )
-            {
-                System.out.println("There was a problem\n" +e.getMessage());
-            }
-        }
-        else if(event.getMessage().getContent().contains("!check")){
-            try{
-                TestBot.message = event.getMessage();
-                MessageList msgList = new MessageList(TestBot.discordClient,
-                        TestBot.message.getChannel());
-                
-                 String command = event.getMessage().getContent();
-                 command = command.trim();
-                 System.out.println("String is " +command.length() +" long");
-                 command = command.substring(7, command.length() );
-                 String url = "https://steamdb.info/app/";
-                 try
-                {
-                     System.out.println(command);
-                    new MessageBuilder(TestBot.discordClient)
-                    .withChannel("238503415326441473")
-                    .withContent(GrabInfo.GetList(url+command, command))
-                    .build();
-                }
-                catch ( Exception e )
-                {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }catch (NullPointerException e){
-                System.out.println("There was a problem\n" + e.getMessage());
-            }
-        }
 
         // else if (event.getMessage().getContent().equalsIgnoreCase("give
         // current channel id")) {

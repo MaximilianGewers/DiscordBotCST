@@ -14,7 +14,7 @@ public class TestBot
                                     // was sent.
 
     public static final String version = "0.0.1";
-
+    
     public static void main( String[] args ) throws Exception
     {
         // if ( args.length < 1 )
@@ -22,7 +22,7 @@ public class TestBot
         // System.out.print("You need to specify a token before continuing");
         // }
         discordClient = setClient(
-                "");
+                "enter token here");
 
         discordClient.getDispatcher().registerListener(new EventHandler());
         discordClient.getDispatcher()
