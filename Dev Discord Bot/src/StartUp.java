@@ -17,7 +17,7 @@ public class StartUp
             new MessageBuilder(TestBot.discordClient)
                     .withChannel("238503415326441473")
                     .withContent("```Bot is up and running " + "\nVersion: "
-                            + TestBot.version + "```")
+                            + TestBot.VERSION + "```")
                     .build();
         }
 
